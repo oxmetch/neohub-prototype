@@ -1,5 +1,5 @@
 // Офлайн-кэш: при установке скачиваем всё приложение, дальше отдаём из кэша.
-const CACHE = 'unicorn-da053e2342';
+const CACHE = 'unicorn-19e9bb54db';
 const FILES = [
   './',
   'index.html',
