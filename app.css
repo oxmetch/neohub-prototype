@@ -1,0 +1,239 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #FFFFFF;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  overscroll-behavior: none;
+}
+
+/* Экраны свёрстаны в 390pt; на телефоне масштабируем под ширину устройства */
+#device {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+#stage {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 390px;
+  transform-origin: 0 0;
+}
+.screen {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #FFFFFF;
+  will-change: transform;
+}
+.screen[hidden] { display: none; }
+.screen > div { width: 390px !important; }
+
+/* Системный статус-бар iOS рисуется поверх — макетный прячем */
+.fake-status { visibility: hidden; }
+
+/* Кликабельные зоны */
+.tap { cursor: pointer; transition: opacity .12s, transform .12s; }
+.tap:active { opacity: .6; }
+.key:active { transform: scale(.92); opacity: .7; }
+
+/* Переходы как в iOS */
+.screen.enter-push { animation: pushIn .34s cubic-bezier(.2,.8,.2,1) both; z-index: 2; }
+.screen.leave-push { animation: pushOut .34s cubic-bezier(.2,.8,.2,1) both; z-index: 1; }
+.screen.enter-pop  { animation: popIn .3s cubic-bezier(.2,.8,.2,1) both; z-index: 1; }
+.screen.leave-pop  { animation: popOut .3s cubic-bezier(.2,.8,.2,1) both; z-index: 2; }
+.screen.enter-fade { animation: fadeIn .35s ease both; z-index: 2; }
+.screen.leave-fade { animation: fadeOut .35s ease both; z-index: 1; }
+@keyframes pushIn  { from { transform: translateX(100%); } to { transform: none; } }
+@keyframes pushOut { from { transform: none; } to { transform: translateX(-28%); filter: brightness(.92); } }
+@keyframes popIn   { from { transform: translateX(-28%); filter: brightness(.92); } to { transform: none; } }
+@keyframes popOut  { from { transform: none; } to { transform: translateX(100%); } }
+@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+/* Face ID */
+#faceid {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,.18);
+  animation: fadeIn .2s ease both;
+}
+#faceid[hidden] { display: none; }
+.faceid-box {
+  width: 156px;
+  height: 156px;
+  border-radius: 32px;
+  background: rgba(30,30,30,.82);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font: 600 15px/20px system-ui, sans-serif;
+}
+.faceid-box .check { stroke-dasharray: 40; stroke-dashoffset: 40; }
+.faceid-box.ok .face { opacity: 0; transition: opacity .15s; }
+.faceid-box.ok .check { stroke-dashoffset: 0; transition: stroke-dashoffset .35s ease .1s; }
+.faceid-box.ok { color: #34C759; }
+.faceid-box:not(.ok) svg { animation: scan 1s ease-in-out infinite alternate; }
+@keyframes scan { from { transform: scale(1); } to { transform: scale(.9); } }
+
+/* Тост */
+#toast {
+  position: absolute;
+  left: 50%;
+  bottom: calc(env(safe-area-inset-bottom) + 96px);
+  transform: translateX(-50%);
+  z-index: 60;
+  max-width: 80%;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: rgba(30,30,30,.9);
+  color: #FFFFFF;
+  font: 500 15px/20px 'Inter', system-ui, sans-serif;
+  text-align: center;
+  animation: toastIn .25s ease both;
+}
+#toast[hidden] { display: none; }
+@keyframes toastIn { from { opacity: 0; transform: translate(-50%, 12px); } to { opacity: 1; transform: translateX(-50%); } }
+
+/* На компьютере показываем телефон в рамке */
+@media (min-width: 600px) {
+  body { background: #E9EBF0; }
+  #device {
+    inset: auto;
+    left: 50%;
+    top: 50%;
+    width: 390px;
+    height: 844px;
+    transform: translate(-50%, -50%) scale(var(--fit, 1));
+    border-radius: 54px;
+    box-shadow: 0 0 0 12px #111, 0 30px 80px rgba(0,0,0,.35);
+  }
+  #install-hint { display: none !important; }
+}
+
+/* Подсказка «На экран Домой» в обычном Safari */
+#install-hint {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: calc(env(safe-area-inset-bottom) + 12px);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  border-radius: 16px;
+  background: #1F1F1F;
+  color: #FFFFFF;
+  font: 400 14px/19px 'Inter', system-ui, sans-serif;
+  box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+#install-hint[hidden] { display: none; }
+#install-hint b { font-weight: 600; font-size: 15px; }
+#install-hint svg { vertical-align: -3px; }
+#install-hint button {
+  align-self: flex-end;
+  margin-top: 4px;
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 14px;
+  background: #00AB76;
+  color: #FFFFFF;
+  font: 600 14px/18px 'Inter', system-ui, sans-serif;
+}
+
+/* Push-уведомление */
+.push {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  top: calc(env(safe-area-inset-top) + 8px);
+  z-index: 70;
+  display: flex;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 22px;
+  background: rgba(245,245,247,.86);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  backdrop-filter: blur(24px) saturate(1.6);
+  box-shadow: 0 8px 30px rgba(0,0,0,.18);
+  color: #111;
+  font: 400 15px/20px system-ui, sans-serif;
+  animation: pushDown .4s cubic-bezier(.2,.9,.3,1.2) both;
+  cursor: pointer;
+}
+.push.out { animation: pushUp .3s ease both; }
+@media (min-width: 600px) { .push { top: 52px; } }
+.push-icon {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: #00AB76;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 20px/1 'Inter', system-ui, sans-serif;
+}
+.push-body { flex: 1; min-width: 0; }
+.push-head { display: flex; justify-content: space-between; }
+.push-head b { font-weight: 600; }
+.push-head span { color: #8a8a8e; font-size: 13px; }
+@keyframes pushDown { from { transform: translateY(-140%); } to { transform: none; } }
+@keyframes pushUp { to { transform: translateY(-140%); opacity: 0; } }
+
+/* Меню сценариев для ведущего */
+#menu {
+  position: absolute;
+  inset: 0;
+  z-index: 90;
+  background: rgba(0,0,0,.35);
+  display: flex;
+  align-items: flex-end;
+  animation: fadeIn .2s ease both;
+}
+.menu-sheet {
+  width: 100%;
+  max-height: 85%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 20px 16px calc(env(safe-area-inset-bottom) + 16px);
+  border-radius: 24px 24px 0 0;
+  background: #FFFFFF;
+  font-family: 'Inter', system-ui, sans-serif;
+  animation: sheetUp .3s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes sheetUp { from { transform: translateY(100%); } to { transform: none; } }
+.menu-title { font-size: 22px; font-weight: 700; letter-spacing: -.02em; margin: 0 4px 12px; }
+.menu-sheet button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #EFF0F5;
+  background: none;
+  padding: 12px 4px;
+  font: inherit;
+  text-align: left;
+  color: #303030;
+}
+.menu-sheet button b { font-size: 16px; font-weight: 600; }
+.menu-sheet button span { font-size: 13px; color: #747474; }
+.menu-sheet .menu-close { border: 0; align-items: center; color: #00AB76; font-weight: 600; font-size: 16px; padding-top: 16px; }
