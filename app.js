@@ -14,10 +14,17 @@
       stage.style.height = '844px';
       device.style.setProperty('--fit', Math.min(1, (window.innerHeight - 48) / 868).toFixed(3));
     } else {
+      // В режиме приложения iOS иногда отдаёт innerHeight без полоски внизу —
+      // тогда берём полную высоту экрана
+      const h = isStandalone() ? Math.max(window.innerHeight, screen.height) : window.innerHeight;
+      document.documentElement.style.height = document.body.style.height = device.style.height = `${h}px`;
       scale = window.innerWidth / W;
       stage.style.transform = `scale(${scale})`;
-      stage.style.height = `${window.innerHeight / scale}px`;
+      stage.style.height = `${h / scale}px`;
     }
+  }
+  function isStandalone() {
+    return window.navigator.standalone || matchMedia('(display-mode: standalone)').matches;
   }
   window.addEventListener('resize', layout);
   layout();
@@ -83,6 +90,8 @@
     const prev = stack.length ? screenEl(stack[stack.length - 1]) : null;
     if (!next || next === prev) return;
     next.hidden = false;
+    // фон страницы под цвет экрана — на случай зазоров у краёв
+    document.body.style.background = getComputedStyle(next.firstElementChild).backgroundColor;
     prepare(id);
     if (enterHooks[id]) enterHooks[id](next);
     if (!prev || mode === 'none') {
@@ -512,9 +521,8 @@
   startSplash();
 
   // подсказка установки — только в обычном Safari на iPhone
-  const standalone = window.navigator.standalone || matchMedia('(display-mode: standalone)').matches;
   const hint = document.getElementById('install-hint');
-  if (!standalone && /iPhone|iPad|iPod/.test(navigator.userAgent)) {
+  if (!isStandalone() &&/iPhone|iPad|iPod/.test(navigator.userAgent)) {
     hint.hidden = false;
     document.getElementById('install-hint-close').onclick = () => { hint.hidden = true; };
   }
