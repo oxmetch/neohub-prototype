@@ -259,7 +259,7 @@
       ['Госуслуги', () => toast('Справки и госуслуги для бизнеса'), { maxH: 140 }],
       ['AI-CFO', () => toast('AI-CFO: прогноз cash flow на квартал'), { maxH: 140 }],
     ],
-    profile: [['Реферальная программа', 'referral', { wide: true }]],
+    profile: [['Реферальная программа', 'referral', { wide: true }], ['Выйти из аккаунта', () => reset('welcome')]],
     'tr-where': [
       ['На карту', 'tr-card'], ['На PayPal', 'tr-paypal'], ['На Stripe', 'tr-stripe'],
       ['Данияр К.', 'tr-card'], ['Mila Design', 'tr-paypal'], ['Stripe', 'tr-stripe'],
