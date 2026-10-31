@@ -1,5 +1,5 @@
 // Офлайн-кэш: при установке скачиваем всё приложение, дальше отдаём из кэша.
-const CACHE = 'unicorn-6a3145a3f3';
+const CACHE = 'unicorn-a8441fda29';
 const FILES = [
   './',
   'index.html',
@@ -21,6 +21,7 @@ const FILES = [
   'assets/3K4SGH9QZ2NQGAPQPSXGVSM1ER.png',
   'assets/3Z5ATW16WPE7PBFRGD739RWTC4.png',
   'assets/404EQ93S2Q49JWG2RP77P1Z2KD.png',
+  'assets/4XM3SYW68WQZ52BJ2VYR0M99RJ.png',
   'assets/5W4D5DK67ZRVTY8AXJ07GEFKPX.png',
   'assets/60J69E6545JSVSGAFA7CP5VKPF.png',
   'assets/61W1ZWCNBMGF50KA27DVEXRTVJ.png',
