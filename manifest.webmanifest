@@ -1,6 +1,6 @@
 {
-  "name": "Unicorn Bank",
-  "short_name": "Unicorn Bank",
+  "name": "Neohub",
+  "short_name": "Neohub",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

@@ -155,7 +155,7 @@
   function notify(title, text, onTap) {
     const n = document.createElement('div');
     n.className = 'push';
-    n.innerHTML = `<div class="push-icon">U</div><div class="push-body"><div class="push-head"><b>${title}</b><span>сейчас</span></div><div>${text}</div></div>`;
+    n.innerHTML = `<div class="push-icon">N</div><div class="push-body"><div class="push-head"><b>${title}</b><span>сейчас</span></div><div>${text}</div></div>`;
     device.appendChild(n);
     const close = () => { n.classList.add('out'); setTimeout(() => n.remove(), 300); };
     n.addEventListener('click', () => { close(); onTap && onTap(); });
@@ -452,7 +452,7 @@
     clearTimeout(enterHooks._rev);
     enterHooks._rev = setTimeout(() => {
       if (stack[stack.length - 1] === 'b-review')
-        notify('Unicorn Bank', 'Проверка KYB пройдена — счета ABC LLP открыты', () => go('b-done'));
+        notify('Neohub', 'Проверка KYB пройдена — счета ABC LLP открыты', () => go('b-done'));
     }, 3500);
   };
 

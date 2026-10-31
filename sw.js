@@ -1,5 +1,5 @@
 // Офлайн-кэш: при установке скачиваем всё приложение, дальше отдаём из кэша.
-const CACHE = 'unicorn-a8441fda29';
+const CACHE = 'neohub-ccb0bf52fd';
 const FILES = [
   './',
   'index.html',
@@ -13,6 +13,7 @@ const FILES = [
   'assets/1D30VH5P8M6FZCAC1FX98RSTSP.jpg',
   'assets/1R8NQD6K296AVZ0QB6XCJE32PF.png',
   'assets/1TZYA62XQVG1PH4XZCB6Q76Y25.png',
+  'assets/1X83DQXCD43YSABT03GTCWSSXT.jpg',
   'assets/23P8EWR1W686R5QAKN8HFHXPF8.png',
   'assets/2CK7Q3PA1NV8BG8MF6JC0CVCKF.png',
   'assets/2Z2SEGR0TAR682EZN5JHNV4JFR.jpg',
@@ -21,7 +22,9 @@ const FILES = [
   'assets/3K4SGH9QZ2NQGAPQPSXGVSM1ER.png',
   'assets/3Z5ATW16WPE7PBFRGD739RWTC4.png',
   'assets/404EQ93S2Q49JWG2RP77P1Z2KD.png',
+  'assets/44BWX1TW4VPSCZR5ZJ2MM363NH.jpg',
   'assets/4XM3SYW68WQZ52BJ2VYR0M99RJ.png',
+  'assets/5GBF76KN0ZP8PNGGXPY5YAEYMN.jpg',
   'assets/5W4D5DK67ZRVTY8AXJ07GEFKPX.png',
   'assets/60J69E6545JSVSGAFA7CP5VKPF.png',
   'assets/61W1ZWCNBMGF50KA27DVEXRTVJ.png',

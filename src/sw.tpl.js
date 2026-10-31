@@ -1,5 +1,5 @@
 // Офлайн-кэш: при установке скачиваем всё приложение, дальше отдаём из кэша.
-const CACHE = 'unicorn-__VERSION__';
+const CACHE = 'neohub-__VERSION__';
 const FILES = [
   __FILES__
 ];
