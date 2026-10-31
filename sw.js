@@ -1,5 +1,5 @@
 // Офлайн-кэш: при установке скачиваем всё приложение, дальше отдаём из кэша.
-const CACHE = 'neohub-ccb0bf52fd';
+const CACHE = 'neohub-e924bbf8ce';
 const FILES = [
   './',
   'index.html',

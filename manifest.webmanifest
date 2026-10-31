@@ -1,6 +1,6 @@
 {
-  "name": "Neohub",
-  "short_name": "Neohub",
+  "name": "neohub",
+  "short_name": "neohub",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
